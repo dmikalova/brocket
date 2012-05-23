@@ -1,0 +1,40 @@
+Usage: brocket [-hv[a|p|R]] [TITLE] COMMAND
+
+brocket is intended to see if a application is running, and if so, bring the
+ application's window to the front, otherwise launch an instance.
+ In essence, a single window mode.
+
+Arguments:
+    -h   Print this help.
+    -H   Print some more information.
+    -v   Be verbose.
+
+Modes:
+    -a   Go to the desktop with the window.
+    -p   Only activate windows on this desktop.
+    -R   Bring the window from another desktop.
+
+Examples:
+    brocket kate
+    brocket Dolphin dolphin
+    brocket "LibreOffice Writer" libreoffice
+    brocket -R amarok
+    brocket -pv konsole
+
+Peculiarities:
+    - The last mode entered is the one that counts.
+    - p trumps a|R.
+    - If there are already multiple search results, the oldest one counts.
+    -
+Suggestions:
+    - Try aliases in ~/.bashrc, however you won't be able to launch multiple
+       instances without \escaping.
+    - Also try out KDE4's Custom Shortcuts to create a global shortcut.
+
+Future Plans:
+    - Implement move window to desktop +-1 (missing in KDE4)
+    - Close window after inactivity (not possible in wmctrl)
+
+Information:
+    brocket v1.0 by superfuzzykittens
+    https://github.com/superfuzzykittens/brocket
