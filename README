@@ -1,13 +1,39 @@
-Usage: brocket [-hv[a|p|R]] [TITLE] COMMAND
+# GPL License
 
-brocket is intended to see if a application is running, and if so, bring the
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+<http://www.gnu.org/licenses/>.
+
+#Information:
+    brocket v1.0 by superfuzzykittens
+    https://github.com/superfuzzykittens/brocket
+
+# Help
+help="Usage: brocket [-hv[a|p|R]] [TITLE] COMMAND
+
+brocket attempts to see if an application is running, and if so, bring the
  application's window to the front, otherwise launch an instance.
  In essence, a single window mode.
 
-Arguments:
+Help:
     -h   Print this help.
     -H   Print some more information.
     -v   Be verbose.
+
+Arguments:
+    TITLE     The window title case insensitive substring to search for.
+    COMMAND   The shell command to run if there are no matches.
+
+              A title search argument is optional, and when not provided, the
+               command will be searched.
 
 Modes:
     -a   Go to the desktop with the window.
@@ -24,8 +50,8 @@ Examples:
 Peculiarities:
     - The last mode entered is the one that counts.
     - p trumps a|R.
-    - If there are already multiple search results, the oldest one counts.
-    -
+    - If there are multiple search results, the oldest one counts.
+
 Suggestions:
     - Try aliases in ~/.bashrc, however you won't be able to launch multiple
        instances without \escaping.
@@ -33,8 +59,4 @@ Suggestions:
 
 Future Plans:
     - Implement move window to desktop +-1 (missing in KDE4)
-    - Close window after inactivity (not possible in wmctrl)
-
-Information:
-    brocket v1.0 by superfuzzykittens
-    https://github.com/superfuzzykittens/brocket
+    - Close window after inactivity time (not possible in wmctrl)
