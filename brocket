@@ -4,7 +4,7 @@
 name="brocket"
 author="superfuzzykittens"
 version="1.0"
-site="empty"
+site="https://github.com/superfuzzykittens/brocket"
 
 # Help
 help="Usage: $(basename ${0}) [-hv[a|p|R]] [TITLE] COMMAND
