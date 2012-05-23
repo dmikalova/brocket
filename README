@@ -37,7 +37,7 @@ Arguments:
 
 Modes:
     -a   Go to the desktop with the window.
-    -p   Only activate windows on this desktop.
+    -p   Only activate windows on this desktop. (default)
     -R   Bring the window from another desktop.
 
 Examples:
