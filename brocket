@@ -57,9 +57,10 @@ Peculiarities:
     - If there are already multiple search results, the oldest one counts.
     -
 Suggestions:
-    - Try aliases in ~/.bashrc, however you won't be able to launch multiple
-       instances without \escaping.
-    - Also try out KDE4's Custom Shortcuts to create a global shortcut.
+    - Try out KDE4's Custom Shortcuts to create a global shortcut.
+    - Try aliases in ~/.bashrc. This will only affect your terminals, and not
+       krunner or KDE4's global shortcuts.
+       Launch multiple instances with \escapes
 
 Future Plans:
     - Implement move window to desktop +-1 (missing in KDE4)
