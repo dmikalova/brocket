@@ -26,7 +26,7 @@ arch=(any)
 url=$site
 license=('GPL')
 groups=()
-depends=('bash' 'wmctrl')
+depends=('bash' 'wmctrl' 'bc')
 optdepends=()
 provides=()
 conflicts=()
@@ -45,10 +45,13 @@ echo "##### namcap results:"
 echo "$(namcap ./PKGBUILD)"
 echo
 echo "##### makepkg --source results:"
+$(makepkg -f)
+echo
+echo "##### makepkg --source results:"
 $(makepkg -f --source)
 echo
 echo "##### Git results:"
-$(git add PKGBUILD README brocket builder)
+$(git add PKGBUILD README brocket brocket-builder)
 echo "$(git status)"
 echo
 echo "You can now 'git commit' and 'git push -u origin master'"

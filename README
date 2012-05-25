@@ -13,11 +13,11 @@ GPL License:
     <http://www.gnu.org/licenses/>
     
 Usage:
-    brocket [-hHLv] [-m|n][-a|c|p|R] [TITLE] COMMAND
+    brocket [-hHLv] [-m|n][-a|p|R][-c] COMMAND [TITLE]
 
     brocket attempts to see if an application is running, and if so, bring the
      application's window to the front, otherwise launch an instance.
-     In essence, a single window mode.
+     In essence, a single window moveMode.
 
 Arguments:
     TITLE     The window title to search for.(case insensitive substring)
@@ -25,15 +25,16 @@ Arguments:
 
               A title search is optional and the command will be used instead.
               A command search should be sufficient to find a general program.
+              Multiple results will be cycled through.
 
 Modes:
     -a   Move to the desktop with the window.
-    -c   Ignore the window class and only do a window title search.
     -p   Only activate windows on the current desktop. (default)
     -R   Bring the window from any desktop.
 
-    -m   Move the active window to the desktop on the left.
-    -n   Move the active window to the desktop on the right.
+    -c   Ignore the window class and only do a window title search.
+    -m   Move the active window to the desktop on the left.  (ignores searches)
+    -n   Move the active window to the desktop on the right. (ignores searches)
 
 Help:
     -h   Print help.
@@ -59,8 +60,7 @@ Compatability:
     - With all that being said, brocket has only been developed for/on Kwin.
 
 Peculiarities:
-    - The last mode entered should trump all others
-    - If there are multiple search results, the oldest one counts.
+    - The trumping order of modes is [-m|n][-a|p|R]
 
 Suggestions:
     - Try out KDE4's Custom Shortcuts to create a global shortcut.
@@ -69,11 +69,9 @@ Suggestions:
 
 Future Plans:
     - Close window after inactivity time which is not possible in wmctrl.
-    - Have the mode parsed so -a|R|p can react to -c.
     - Be able to -aR from specific desktops.
 
-
 Information:
-    brocket v1.2.1 by superfuzzykittens
+    brocket v2.0 by superfuzzykittens
     https://github.com/superfuzzykittens/brocket
     
