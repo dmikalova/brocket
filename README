@@ -69,7 +69,9 @@ Suggestions:
 
 Future Plans:
     - Close window after inactivity time which is not possible in wmctrl.
-    - Be able to -aR from specific desktops.
+    - Be able to -aR from specific desktops. (like a -p 1 option)
+    - Be able to launch onto specific desktops.wmctrl
+    - Raise to specific screens
 
 Information:
     brocket v2.0 by superfuzzykittens
