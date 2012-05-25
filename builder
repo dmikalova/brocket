@@ -35,11 +35,11 @@ backup=()
 options=()
 install=
 source=(brocket)
-md5sums=('$md5sum')
+md5sums=('$md5sum')"'
 
 build() {
   install -Dm 755 $srcdir/brocket ${pkgdir}/usr/bin/brocket
-}" > ./PKGBUILD
+}' > ./PKGBUILD
 
 echo "##### namcap results:"
 echo "$(namcap ./PKGBUILD)"
@@ -52,4 +52,4 @@ $(git add PKGBUILD README brocket builder)
 echo "$(git status)"
 echo
 echo "You can now 'git commit' and 'git push -u origin master'"
-echo "and 'aurup ./$name-$version-$pkgrel.src.tar.gz'"
+echo "and 'aurup ./$name-$version-$pkgrel.src.tar.gz x11'"
