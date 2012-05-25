@@ -10,10 +10,10 @@ GPL License:
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    <http://www.gnu.org/licenses/>.
+    <http://www.gnu.org/licenses/>
     
 Usage:
-    brocket [-hv[a|c|p|R]] [TITLE] COMMAND|-m|-n
+    brocket [-hHLv] [-m|n][-a|c|p|R] [TITLE] COMMAND
 
     brocket attempts to see if an application is running, and if so, bring the
      application's window to the front, otherwise launch an instance.
@@ -27,9 +27,9 @@ Arguments:
               A command search should be sufficient to find a general program.
 
 Modes:
-    -a   Go to the desktop with the window.
+    -a   Move to the desktop with the window.
     -c   Ignore the window class and only do a window title search.
-    -p   Only activate windows on current desktop. (default)
+    -p   Only activate windows on the current desktop. (default)
     -R   Bring the window from any desktop.
 
     -m   Move the active window to the desktop on the left.
@@ -49,10 +49,9 @@ Examples:
     brocket -Rv konsole
     brocket -ac gwenview
     brocket -m
-
-
+    
 Compatability:
-    - brocket is based on wmctrl, should work with the same WMs as wmctrl.
+    - brocket is based on wmctrl, and should work with the same WMs as wmctrl.
     - wmctrl is compatible with 'EWMH/NetWM compatible X Window Managers'
        Explicitly: Enlightenment, IceWM, KWin, Sawfish, and Xfce.
        Implicitly: Awesome, Fluxbox, Compiz, Openbox, and Metacity
@@ -67,11 +66,14 @@ Suggestions:
     - Try out KDE4's Custom Shortcuts to create a global shortcut.
     - Try aliases in ~/.bashrc. This will only affect your terminals, and not
        krunner or KDE4's global shortcuts. Run multiple instances by \escaping.
-    -
 
 Future Plans:
-    - Implement move window to desktop +-1 (missing in KDE4)
-    - Close window after inactivity time (not possible in wmctrl)
+    - Close window after inactivity time which is not possible in wmctrl.
+    - Have the mode parsed so -a|R|p can react to -c.
+    - Be able to -aR from specific desktops.
+
+
 Information:
-    brocket v1.2 by superfuzzykittens
+    brocket v1.2.1 by superfuzzykittens
     https://github.com/superfuzzykittens/brocket
+    
