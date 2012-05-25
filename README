@@ -1,63 +1,77 @@
-# GPL License
+GPL License:
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-<http://www.gnu.org/licenses/>.
+    <http://www.gnu.org/licenses/>.
+    
+Usage:
+    brocket [-hv[a|c|p|R]] [TITLE] COMMAND|-m|-n
 
-#Information:
-    brocket v1.0 by superfuzzykittens
-    https://github.com/superfuzzykittens/brocket
-
-# Help
-help="Usage: brocket [-hv[a|p|R]] [TITLE] COMMAND
-
-brocket attempts to see if an application is running, and if so, bring the
- application's window to the front, otherwise launch an instance.
- In essence, a single window mode.
-
-Help:
-    -h   Print this help.
-    -H   Print some more information.
-    -v   Be verbose.
+    brocket attempts to see if an application is running, and if so, bring the
+     application's window to the front, otherwise launch an instance.
+     In essence, a single window mode.
 
 Arguments:
-    TITLE     The window title case insensitive substring to search for.
-    COMMAND   The shell command to run if there are no matches.
+    TITLE     The window title to search for.(case insensitive substring)
+    COMMAND   The shell command to search the window classes with.
 
-              A title search argument is optional, and when not provided, the
-               command will be searched.
+              A title search is optional and the command will be used instead.
+              A command search should be sufficient to find a general program.
 
 Modes:
     -a   Go to the desktop with the window.
-    -p   Only activate windows on this desktop. (default)
-    -R   Bring the window from another desktop.
+    -c   Ignore the window class and only do a window title search.
+    -p   Only activate windows on current desktop. (default)
+    -R   Bring the window from any desktop.
+
+    -m   Move the active window to the desktop on the left.
+    -n   Move the active window to the desktop on the right.
+
+Help:
+    -h   Print help.
+    -H   Print more help.
+    -L   GPL License.
+    -v   Be verbose.
 
 Examples:
     brocket kate
     brocket Dolphin dolphin
     brocket "LibreOffice Writer" libreoffice
     brocket -R amarok
-    brocket -pv konsole
+    brocket -Rv konsole
+    brocket -ac gwenview
+    brocket -m
+
+
+Compatability:
+    - brocket is based on wmctrl, should work with the same WMs as wmctrl.
+    - wmctrl is compatible with 'EWMH/NetWM compatible X Window Managers'
+       Explicitly: Enlightenment, IceWM, KWin, Sawfish, and Xfce.
+       Implicitly: Awesome, Fluxbox, Compiz, Openbox, and Metacity
+                   (and XMonad if you turn on EWHM), and probably others.
+    - With all that being said, brocket has only been developed for/on Kwin.
 
 Peculiarities:
-    - The last mode entered is the one that counts.
-    - p trumps a|R.
+    - The last mode entered should trump all others
     - If there are multiple search results, the oldest one counts.
 
 Suggestions:
     - Try out KDE4's Custom Shortcuts to create a global shortcut.
     - Try aliases in ~/.bashrc. This will only affect your terminals, and not
-       krunner or KDE4's global shortcuts.
-       Launch multiple instances with \escapes
+       krunner or KDE4's global shortcuts. Run multiple instances by \escaping.
+    -
 
 Future Plans:
     - Implement move window to desktop +-1 (missing in KDE4)
     - Close window after inactivity time (not possible in wmctrl)
+Information:
+    brocket v1.2 by superfuzzykittens
+    https://github.com/superfuzzykittens/brocket
