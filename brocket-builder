@@ -44,7 +44,7 @@ build() {
 echo "##### namcap results:"
 echo "$(namcap ./PKGBUILD)"
 echo
-echo "##### makepkg --source results:"
+echo "##### makepkg results:"
 $(makepkg -f)
 echo
 echo "##### makepkg --source results:"
