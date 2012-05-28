@@ -17,11 +17,11 @@ Usage:
 
     brocket attempts to see if an application is running, and if so, bring the
      application's window to the front, otherwise launch an instance.
-     In essence, a single window moveMode.
+     In essence, a single window mode.
 
 Arguments:
-    TITLE     The window title to search for.(case insensitive substring)
     COMMAND   The shell command to search the window classes with.
+    TITLE     The window title to search.(case insensitive substring)
 
               A title search is optional and the command will be used instead.
               A command search should be sufficient to find a general program.
@@ -33,8 +33,8 @@ Modes:
     -R   Bring the window from any desktop.
 
     -c   Ignore the window class and only do a window title search.
-    -m   Move the active window to the desktop on the left.  (ignores searches)
-    -n   Move the active window to the desktop on the right. (ignores searches)
+    -m   Move the active window to the desktop on the left.
+    -n   Move the active window to the desktop on the right.
 
 Help:
     -h   Print help.
@@ -55,25 +55,27 @@ Compatability:
     - brocket is based on wmctrl, and should work with the same WMs as wmctrl.
     - wmctrl is compatible with 'EWMH/NetWM compatible X Window Managers'
        Explicitly: Enlightenment, IceWM, KWin, Sawfish, and Xfce.
-       Implicitly: Awesome, Fluxbox, Compiz, Openbox, and Metacity
+       Implicitly: Awesome, Fluxbox, Compiz, Openbox, and Metacity,
                    (and XMonad if you turn on EWHM), and probably others.
     - With all that being said, brocket has only been developed for/on Kwin.
 
 Peculiarities:
     - The trumping order of modes is [-m|n][-a|p|R]
+    - The oldest window is the first result.
 
 Suggestions:
-    - Try out KDE4's Custom Shortcuts to create a global shortcut.
+    - Try making a global shortcut, i.e. map 'Super+a' to 'brocket vlc'.
     - Try aliases in ~/.bashrc. This will only affect your terminals, and not
-       krunner or KDE4's global shortcuts. Run multiple instances by \escaping.
+       krunner or KDE4's global shortcuts. Run multiple instances by scaping.
 
 Future Plans:
-    - Close window after inactivity time which is not possible in wmctrl.
-    - Be able to -aR from specific desktops. (like a -p 1 option)
-    - Be able to launch onto specific desktops.wmctrl
+    - Close window after inactivity time, which is not possible in wmctrl.
+    - -aR from specific desktops. (like a -p 1 option)
+    - Launch onto specific desktops. (always launch Amarok on desktop 2)
     - Raise to specific screens
+    - Raise from tray
 
 Information:
-    brocket v2.0 by superfuzzykittens
+    brocket v2.1 by superfuzzykittens
     https://github.com/superfuzzykittens/brocket
     
