@@ -55,4 +55,4 @@ $(git add PKGBUILD README brocket brocket-builder)
 echo "$(git status)"
 echo
 echo "You can now 'git commit' and 'git push -u origin master'"
-echo "and 'aurup ./$name-$version-$pkgrel.src.tar.gz x11'"
+echo "and 'aurupload dmikalova - x11 ./$name-$version-$pkgrel.src.tar.gz'"
