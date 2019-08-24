@@ -11,7 +11,7 @@ GPL License:
     GNU General Public License for more details.
 
     <http://www.gnu.org/licenses/>
-    
+
 Usage:
     brocket [-hHLv] [-m|n][-a|p|R][-c] COMMAND [TITLE]
 
@@ -50,7 +50,7 @@ Examples:
     brocket -Rv konsole
     brocket -ac gwenview
     brocket -m
-    
+
 Compatability:
     - brocket is based on wmctrl, and should work with the same WMs as wmctrl.
     - wmctrl is compatible with 'EWMH/NetWM compatible X Window Managers'
@@ -88,6 +88,5 @@ Future Plans:
     - Faster!
 
 Information:
-    brocket v2.1 by dmikalova
-    https://github.com/dmikalova/brocket
-    
+    brocket v2.2 by dmikalova
+    https://gitlab.com/dmikalova/brocket
