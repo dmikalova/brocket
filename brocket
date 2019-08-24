@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 time1="$(date +%s.%N)"
 license="GPL License:
 
@@ -14,15 +14,6 @@ license="GPL License:
 
     <http://www.gnu.org/licenses/>
     "
-
-# Information
-author="dmikalova"
-description="A run-or-raise launcher for X11 Window Managers."
-email="dmikalova@gmail.com"
-maintainer='David Mikalova'
-name="brocket"
-site="https://github.com/dmikalova/brocket"
-version="2.1"
 
 # Help
 help="Usage:
