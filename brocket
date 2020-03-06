@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 time1="$(date +%s.%N)"
 license="GPL License:
 
@@ -17,9 +17,9 @@ license="GPL License:
 
 # Help
 help="Usage:
-    $(basename ${0}) [-hHLv] [-m|n][-a|p|R][-c] COMMAND [TITLE]
+    $(basename "${0}") [-hHLv] [-m|n][-a|p|R][-c] COMMAND [TITLE]
 
-    $name attempts to see if an application is running, and if so, bring the
+    Brocket attempts to see if an application is running, and if so, bring the
      application's window to the front, otherwise launch an instance.
      In essence, a single window mode.
 
@@ -47,23 +47,23 @@ Help:
     -v   Be verbose.
 
 Examples:
-    $(basename ${0}) kate
-    $(basename ${0}) Dolphin dolphin
-    $(basename ${0}) \"LibreOffice Writer\" libreoffice
-    $(basename ${0}) -R amarok
-    $(basename ${0}) -Rv konsole
-    $(basename ${0}) -ac gwenview
-    $(basename ${0}) -m
+    $(basename "${0}") kate
+    $(basename "${0}") Dolphin dolphin
+    $(basename "${0}") \"LibreOffice Writer\" libreoffice
+    $(basename "${0}") -R amarok
+    $(basename "${0}") -Rv konsole
+    $(basename "${0}") -ac gwenview
+    $(basename "${0}") -m
     "
 
 longHelp="Compatability:
-    - $name is based on wmctrl, and should work with the same WMs as wmctrl.
+    - Brocket is based on wmctrl, and should work with the same WMs as wmctrl.
     - wmctrl is compatible with 'EWMH/NetWM compatible X Window Managers'
        Explicitly: Enlightenment, IceWM, KWin, Sawfish, and Xfce.
        Implicitly: Awesome, Fluxbox, Compiz, Openbox, and Metacity,
                    (and XMonad if you turn on EWHM), and probably others.
     - Reportedly, Awesome, Gnome Shell, Fluxbox, and XMonad have run-or-raise.
-    - With all that being said, $name has only been developed for/on Kwin.
+    - With all that being said, Brocket has only been developed for/on Kwin.
 
 Peculiarities:
     - The trumping order of modes is [-m|n][-a|p|R]
@@ -93,13 +93,12 @@ Future Plans:
     - Faster!
 
 Information:
-    $name v$version by $author
-    $site
+    Brocket by David Mikalova
+    https://gitlab.com/dmikalova/brocket
     "
 
 # The default variable values.
 argsAction="-R"
-argsList="-lx"
 moveMode="Current Desktop"
 searchMode="Class"
 verbose=""
@@ -107,29 +106,50 @@ verbose=""
 # Get the passed options.
 while getopts ":achHLmnpRv" option; do
     case $option in
-        a) argsAction="-a"
-           moveMode="All Desktops";;
+    a)
+        argsAction="-a"
+        moveMode="All Desktops"
+        ;;
 
-        c) argsList="-l"
-           searchMode="Title";;
+    c) searchMode="Title" ;;
 
-        m) argsMove="-1"
-           moveMode="Window move";;
+    m)
+        argsMove="-1"
+        moveMode="Window move"
+        ;;
 
-        n) argsMove="1"
-           moveMode="Window move";;
+    n)
+        argsMove="1"
+        moveMode="Window move"
+        ;;
 
-        p) argsAction="-R"
-           argsList="-lx"
-           moveMode="Current Desktop";;
+    p)
+        argsAction="-R"
+        moveMode="Current Desktop"
+        ;;
 
-        R) argsAction="-R"
-           moveMode="All Desktops";;
+    R)
+        argsAction="-R"
+        moveMode="All Desktops"
+        ;;
 
-        h) echo "$help"; exit 0;;
-        H) echo "$help\n$longHelp"; exit 0;;
-        L) echo -e "$license\n$help\n$longHelp"; exit 0;;
-        v) verbose="true";;
+    h)
+        echo "$help"
+        exit 0
+        ;;
+    H)
+        printf "%s\n%s" "$help" "$longHelp"
+        exit 0
+        ;;
+    L)
+        printf "%s\n%s\n%s" "$license" "$help" "$longHelp"
+        exit 0
+        ;;
+    v) verbose="true" ;;
+    *)
+        echo "Invalid option $*"
+        exit
+        ;;
     esac
 done
 
@@ -137,9 +157,9 @@ done
 shift $((OPTIND - 1))
 
 # Set the launch command and title search.
-command="$1" # Window class search term and launch command.
+command="$1"     # Window class search term and launch command.
 windowTitle="$1" # Title bar search terms.
-if [[ $2 ]]; then
+if [ "$2" ]; then
     # Use window title search if given.
     windowTitle="$2"
 fi
@@ -147,36 +167,36 @@ fi
 # Determine the user's desktop number.
 currentDesktop=" $(wmctrl -d | grep "\*" | cut -c 1)"
 # Determine the user's active windowID.
-currentWindow="$(printf '0x%08x\n' $(xprop -root |
-                 grep "_NET_ACTIVE_WINDOW(WINDOW)" | grep -E -o "0x[0-9a-f]+"))"
+currentWindow="$(printf '0x%08x\n' "$(xprop -root |
+    grep "_NET_ACTIVE_WINDOW(WINDOW)" | grep -E -o "0x[0-9a-f]+")")"
 
 # Preserve the currentDesktop and command terms.
 desktopSearch="$currentDesktop" # For searching all desktops.
-classSearch="$command" # For classless searching.
-if [[ "$moveMode" == "All Desktops" ]]; then
+classSearch="$command"          # For classless searching.
+if [ "$moveMode" = "All Desktops" ]; then
     # Search all desktops
     desktopSearch=".."
 fi
-if [[ "$searchMode" == "Title" ]]; then
+if [ "$searchMode" = "Title" ]; then
     # Search only window title, ignore class.
     classSearch=".*"
 fi
 searchResults="$(wmctrl -lx | grep "0x........ $desktopSearch $classSearch\." |
-                 grep -i "$windowTitle")"
+    grep -i "$windowTitle")"
 
 # Check if search match is the current window, If so use the next match.
 windowID="$(echo "$searchResults" | grep -A1 "$currentWindow" | tail -1 |
-            cut -c 1-10)"
-if [[ $windowID == $currentWindow ]]; then
+    cut -c 1-10)"
+if [ "$windowID" = "$currentWindow" ]; then
     # If the current window is the last result then use the first result.
-    windowID="$(echo "$searchResults" | head -1 |cut -c 1-10)"
-elif [[ ! $windowID ]]; then
+    windowID="$(echo "$searchResults" | head -1 | cut -c 1-10)"
+elif [ ! "$windowID" ]; then
     # If there is only one window then use that one.
-    windowID="$(echo "$searchResults" | head -1 |cut -c 1-10)"
+    windowID="$(echo "$searchResults" | head -1 | cut -c 1-10)"
 fi
 
 # Raise the window or run command.
-if [[ $windowID ]]; then
+if [ "$windowID" ]; then
     # Activate the window that was found.
     wmctrl -i "$argsAction" "$windowID "
     time2="$(date +%s.%N)"
@@ -185,30 +205,30 @@ else
     KDEcheck="$(type -t kioclient)"
     # Look for a .desktop file to use for launch notifications.
     desktopFile="$(find -L /usr/share/applications/ -name "$command".desktop |
-                   grep -0 "$command")"
-        if [[ $desktopFile != "" ]] && [[ $KDEcheck == "file" ]]; then
-            # Launch with notifications.
-            time2="$(date +%s.%N)"
-            kioclient exec "$desktopFile"
-        else
-            # Launch the program.
-            time2="$(date +%s.%N)"
-            $command &
-        fi
+        grep -0 "$command")"
+    if [ "$desktopFile" != "" ] && [ "$KDEcheck" = "file" ]; then
+        # Launch with notifications.
+        time2="$(date +%s.%N)"
+        kioclient exec "$desktopFile"
+    else
+        # Launch the program.
+        time2="$(date +%s.%N)"
+        $command &
+    fi
 fi
 
 # Check for moving the active window to desktop left or right.
-if [[ "$moveMode" == "Window move" ]]; then
+if [ "$moveMode" = "Window move" ]; then
     desktopCount="$(($(wmctrl -d | tail -1 | cut -c 1) + 1))"
     # Move ±1 from the current desktop mod the total desktops.
-    finalDesktop="$((($argsMove + $currentDesktop + $desktopCount)
-                      % $desktopCount))"
+    finalDesktop="$(((argsMove + currentDesktop + desktopCount) % \
+        desktopCount))"
     wmctrl -r :ACTIVE: -t "$finalDesktop"
     time2="$(date +%s.%N)"
 fi
 
 # Verbose comments moved down for speed.
-if [[ "$verbose" ]]; then
+if [ "$verbose" ]; then
     echo
     echo "Options unparsed: $*"
     echo "Search: $windowTitle"
@@ -217,7 +237,7 @@ if [[ "$verbose" ]]; then
     echo "Move Mode: $moveMode"
     echo
     echo "Window List:"
-    echo "$(wmctrl -lx)"
+    wmctrl -lx
     echo
     echo "Search Results:"
     echo "$searchResults"
@@ -225,12 +245,12 @@ if [[ "$verbose" ]]; then
     echo "Current Window: $currentWindow"
     echo "Move to Window: $windowID"
     echo
-    if [[ ! "$windowID" ]]; then
+    if [ ! "$windowID" ]; then
         echo ".desktop File: $desktopFile"
-        echo -en "KDE: no\b\b$([[ "$KDEcheck" == "file" ]] && echo -n 'yes')"
+        echo "KDE: no\b\b$([ "$KDEcheck" = "file" ] && echo 'yes')"
         echo
     fi
-    echo "Time taken: 0$(echo $time2-$time1 | bc) seconds"
+    echo "Time taken: 0$(echo "$time2"-"$time1" | bc) seconds"
 fi
 
 exit 0

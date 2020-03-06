@@ -1,6 +1,5 @@
 #!/bin/sh
-set -euxo pipefail
 
 WIN=$(xdotool getwindowfocus)
-xdotool windowsize "${WIN}" 33% 100%
-xdotool windowmove "${WIN}" 67% 0%
+xdotool windowsize "${WIN}" 49% 100%
+xdotool windowmove "${WIN}" 51% 0%
