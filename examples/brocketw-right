@@ -1,5 +1,5 @@
 #!/bin/sh
 
 WIN=$(xdotool getwindowfocus)
-xdotool windowsize "${WIN}" 49% 100%
-xdotool windowmove "${WIN}" 51% 0%
+xdotool windowsize "${WIN}" 30% 100%
+xdotool windowmove "${WIN}" 70% 0%
