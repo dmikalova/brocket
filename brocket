@@ -165,7 +165,7 @@ if [ "$2" ]; then
 fi
 
 # Determine the user's desktop number.
-currentDesktop=" $(wmctrl -d | grep "\*" | cut -c 1)"
+currentDesktop="$(wmctrl -d | grep "\*" | cut -c 1)"
 # Determine the user's active windowID.
 currentWindow="$(printf '0x%08x\n' "$(xprop -root |
     grep "_NET_ACTIVE_WINDOW(WINDOW)" | grep -E -o "0x[0-9a-f]+")")"
