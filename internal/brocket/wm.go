@@ -118,8 +118,10 @@ func (wm *wm) frame(a xproto.Window) *ewmh.FrameExtents {
 			panic(err.Error())
 		}
 		return &ewmh.FrameExtents{
-			Left:   f.Left / 2,
-			Right:  f.Right/2 - 1,
+			Left:  f.Left / 2,
+			Right: f.Right / 2,
+			// TODO: account for 0 frame
+			// Right:  f.Right/2 - 1,
 			Top:    f.Top,
 			Bottom: f.Bottom/2 - 1,
 		}
