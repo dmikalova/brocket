@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/dmikalova/brocket/internal/wm"
+	"github.com/dmikalova/brocket/internal/brocket"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +26,7 @@ var runOrRaiseCmd = &cobra.Command{
 			panic(err.Error())
 		}
 
-		wm.RunOrRaise(wm.Conf{
+		brocket.RunOrRaise(brocket.Conf{
 			Cmd:   runCmd,
 			Class: class,
 			List:  list,
