@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	"github.com/dmikalova/brocket/internal/brocket"
 
 	"github.com/spf13/cobra"
 )
@@ -10,27 +10,50 @@ import (
 var resizeCmd = &cobra.Command{
 	Use:   "resize",
 	Short: "Resize windows",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Long: `Use brocket to resize and place windows.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	All values are 0-100/100 multipliers to the max width and height of the desktop.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("resize called")
+		// f, err := cmd.Flags().GetBool("frame")
+		// if err != nil {
+		// 	panic(err.Error())
+		// }
+		h, err := cmd.Flags().GetInt("height")
+		if err != nil {
+			panic(err.Error())
+		}
+		w, err := cmd.Flags().GetInt("width")
+		if err != nil {
+			panic(err.Error())
+		}
+		x, err := cmd.Flags().GetInt("x-offset")
+		if err != nil {
+			panic(err.Error())
+		}
+		y, err := cmd.Flags().GetInt("y-offset")
+		if err != nil {
+			panic(err.Error())
+		}
+		// fmt.Println("flags", f)
+		c := brocket.Conf{
+			// Frame:  f,
+			Height: h,
+			Width:  w,
+			X:      x,
+			Y:      y,
+		}
+
+		brocket.Resize(c)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(resizeCmd)
 
-	// Here you will define your flags and configuration settings.
+	// resizeCmd.Flags().BoolP("frame", "f", false, "Offset with window frame")
+	resizeCmd.Flags().IntP("height", "t", 100, "Window height")
+	resizeCmd.Flags().IntP("width", "w", 100, "Window width")
+	resizeCmd.Flags().IntP("x-offset", "x", 0, "Window x offset")
+	resizeCmd.Flags().IntP("y-offset", "y", 0, "Window y offset")
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// resizeCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// resizeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
