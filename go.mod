@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802
 	github.com/BurntSushi/xgbutil v0.0.0-20190907113008-ad855c713046
 	github.com/commander-cli/cmd v1.3.0
 )

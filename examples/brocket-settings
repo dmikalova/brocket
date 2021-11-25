@@ -1,3 +1,0 @@
-#!/bin/sh
-
-"$HOME/.bin/brocket" systemsettings5

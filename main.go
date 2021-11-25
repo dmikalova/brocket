@@ -1,6 +1,8 @@
 package main
 
-import "github.com/dmikalova/brocket/internal/cmd"
+import (
+	"github.com/dmikalova/brocket/internal/cmd"
+)
 
 func main() {
 	cmd.Execute()
