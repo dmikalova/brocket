@@ -12,10 +12,10 @@ import (
 	"github.com/BurntSushi/xgbutil/icccm"
 )
 
+// Conf for running brocket
 type Conf struct {
-	Cmd   string
-	Class string
-	// Frame  bool
+	Cmd    string
+	Class  string
 	List   bool
 	Height int
 	Width  int
@@ -33,7 +33,7 @@ type wm struct {
 	x    *xgbutil.XUtil
 }
 
-func NewWM(c Conf) wm {
+func newWM(c Conf) wm {
 	wm := wm{
 		conf: c,
 	}
@@ -137,6 +137,10 @@ func (wm *wm) frame(a xproto.Window) *ewmh.FrameExtents {
 
 func (wm *wm) resize() {
 	a := wm.active()
+	if wm.class(a) == "plasmashell" {
+		return
+	}
+
 	f := wm.frame(a)
 	wa := wm.workarea()
 	x := (wa.w*wm.conf.X)/100 + wa.x - f.Left
@@ -155,20 +159,7 @@ func (wm *wm) resize() {
 	if err != nil {
 		panic(err.Error())
 	}
-
-	// hints, err := icccm.WmNormalHintsGet(wm.x, a)
-	// if err != nil {
-	// 	panic(err.Error())
-	// }
-	// fmt.Println("hints", hints)
-
-	// fmt.Println(wm.conf)
-	// fmt.Println(w)
 }
-
-// brocket.sh -c firefox Firefox; wmctrl -r :ACTIVE: -b remove,maximized_vert; wmctrl -r :ACTIVE: -b remove,maximized_horz; wmctrl -r :ACTIVE: -e 0,0,20,800,600
-
-// brocket.sh -c code; wmctrl -r :ACTIVE: -b remove,maximized_vert; wmctrl -r :ACTIVE: -b remove,maximized_horz; wmctrl -r :ACTIVE: -e 0,0,20,800,600
 
 func (wm *wm) run() {
 	runCmd := wm.conf.Cmd

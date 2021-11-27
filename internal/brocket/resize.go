@@ -1,6 +1,7 @@
 package brocket
 
+// Resize a window as defined in Conf
 func Resize(c Conf) {
-	wm := NewWM(c)
+	wm := newWM(c)
 	wm.resize()
 }
